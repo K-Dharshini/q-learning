@@ -112,8 +112,9 @@ def q_learning(env,
 
 ## OUTPUT
 ### Optimal policy, optimal value function, and success rate for the optimal policy
-<img width="867" height="711" alt="image" src="https://github.com/user-attachments/assets/e748309b-90e4-4e0f-9716-da63a27508fc" />
-<img width="1108" height="725" alt="image" src="https://github.com/user-attachments/assets/42323609-7c5b-485b-9b7a-8d70c93b49cc" />
+<img width="854" height="767" alt="image" src="https://github.com/user-attachments/assets/09e82900-9786-4997-82d0-2f1d911ddcfe" />
+<img width="615" height="628" alt="image" src="https://github.com/user-attachments/assets/fb541a6c-7339-48ae-99ef-f06de913b042" />
+<img width="1054" height="888" alt="image" src="https://github.com/user-attachments/assets/c7df7d76-8768-43d8-8669-5fbe1479961c" />
 
 ### Plot comparing the state value functions of Monte Carlo method and Q-learning
 <img width="1550" height="672" alt="image" src="https://github.com/user-attachments/assets/7a6399c9-caf6-419c-b4d7-3f24d89337d1" />
