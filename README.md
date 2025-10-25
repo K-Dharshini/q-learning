@@ -1,29 +1,124 @@
-# Q Learning Algorithm
+# Q-Learning Algorithm
 
+---
 
 ## AIM
-Write the experiment AIM.
+To implement the **Q-Learning algorithm** for a reinforcement learning environment and derive the **optimal policy** and **optimal value function**, comparing its performance with the **Monte Carlo method**.
+
+---
 
 ## PROBLEM STATEMENT
-Explain the problem statement.
+In this experiment, we aim to design and implement an **off-policy Temporal Difference (TD) learning algorithm**, known as **Q-Learning**, to help an agent learn an optimal behavior through interactions with its environment.  
 
-## Q LEARNING ALGORITHM
-Include the steps involved in the Q Learning algorithm
+The agent will learn to choose actions that maximize cumulative rewards over time using the **Q-table**, which stores action-value pairs for each state.
 
-## Q LEARNING FUNCTION
-### Name:
-### Register Number:
+The problem involves:
+- Understanding state–action–reward–next state transitions (s, a, r, s’)
+- Updating the Q-values iteratively using the TD error
+- Exploring and exploiting the environment using an ε-greedy strategy
+- Converging towards the optimal policy π\* and value function V\*
 
+---
 
+## Q-LEARNING ALGORITHM
 
+**Algorithm Steps:**
 
+1. **Initialize**
+   - Initialize Q(s, a) arbitrarily for all state–action pairs.
+   - Set learning rate (α), discount factor (γ), and exploration rate (ε).
 
+2. **For each episode:**
+   - Initialize the starting state `s`.
 
-## OUTPUT:
-Mention the optimal policy, optimal value function , success rate for the optimal policy.
+3. **Repeat for each step of the episode:**
+   - Choose an action `a` using ε-greedy policy derived from Q.
+   - Take action `a`, observe reward `r` and next state `s'`.
+   - Update the Q-value using the Bellman optimality equation:
 
-Include plot comparing the state value functions of Monte Carlo method and Qlearning.
+     \[
+     Q(s, a) = Q(s, a) + α [r + γ \max_{a'} Q(s', a') - Q(s, a)]
+     \]
 
-## RESULT:
+   - Set `s = s'`.
 
-Write your result here
+4. **Until** `s` becomes terminal.
+
+5. **Derive the optimal policy**:
+   \[
+   π^*(s) = \arg\max_a Q(s, a)
+   \]
+
+6. **Output**
+   - Optimal policy (π\*)
+   - Optimal state-value function (V\*)
+   - Success rate and learning curves
+
+---
+
+## ⚙️ Q-LEARNING FUNCTION
+
+### **Name:** Dharshini K  
+### **Register Number:** 212223230047  
+
+```python
+def q_learning(env,
+               gamma=1.0,
+               init_alpha=0.5,
+               min_alpha=0.01,
+               alpha_decay_ratio=0.5,
+               init_epsilon=1.0,
+               min_epsilon=0.1,
+               epsilon_decay_ratio=0.9,
+               n_episodes=3000):
+
+    nS, nA = env.observation_space.n, env.action_space.n
+    pi_track = []
+
+    Q = np.zeros((nS, nA), dtype=np.float64)
+    Q_track = np.zeros((n_episodes, nS, nA), dtype=np.float64)
+
+    select_action = lambda state, Q, epsilon: \
+        np.argmax(Q[state]) if np.random.random() > epsilon \
+        else np.random.randint(len(Q[state]))
+
+    alphas = decay_schedule(init_alpha, min_alpha,
+                            alpha_decay_ratio, n_episodes)
+
+    epsilons = decay_schedule(init_epsilon, min_epsilon,
+                              epsilon_decay_ratio, n_episodes)
+
+    for e in tqdm(range(n_episodes), leave=False):
+        state, done = env.reset(), False
+
+        while not done:
+            action = select_action(state, Q, epsilons[e])
+            next_state, reward, done, _ = env.step(action)
+
+            td_target = reward + gamma * Q[next_state].max() * (not done)
+            td_error = td_target - Q[state][action]
+            Q[state][action] = Q[state][action] + alphas[e] * td_error
+
+            state = next_state
+
+        Q_track[e] = Q
+        pi_track.append(np.argmax(Q, axis=1))
+
+    V = np.max(Q, axis=1)
+    pi = lambda s: {s: a for s, a in enumerate(np.argmax(Q, axis=1))}[s]
+
+    return Q, V, pi, Q_track, pi_track
+```
+
+## OUTPUT
+### Optimal policy, optimal value function, and success rate for the optimal policy
+<img width="867" height="711" alt="image" src="https://github.com/user-attachments/assets/e748309b-90e4-4e0f-9716-da63a27508fc" />
+<img width="1108" height="725" alt="image" src="https://github.com/user-attachments/assets/42323609-7c5b-485b-9b7a-8d70c93b49cc" />
+
+### Plot comparing the state value functions of Monte Carlo method and Q-learning
+<img width="1550" height="672" alt="image" src="https://github.com/user-attachments/assets/7a6399c9-caf6-419c-b4d7-3f24d89337d1" />
+<img width="1602" height="664" alt="image" src="https://github.com/user-attachments/assets/8ebd81d6-0459-49b6-bb0a-c88264647086" />
+
+## RESULT
+The Q-Learning algorithm was successfully implemented. The agent learned an optimal policy that maximized cumulative rewards through iterative Q-value updates.
+The comparison plot demonstrates that the Q-learning state-value function closely approximates or outperforms the Monte Carlo method, confirming efficient off-policy TD learning behavior.
