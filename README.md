@@ -112,13 +112,16 @@ def q_learning(env,
 
 ## OUTPUT
 ### Optimal policy, optimal value function, and success rate for the optimal policy
-<img width="854" height="767" alt="image" src="https://github.com/user-attachments/assets/09e82900-9786-4997-82d0-2f1d911ddcfe" />
-<img width="615" height="628" alt="image" src="https://github.com/user-attachments/assets/fb541a6c-7339-48ae-99ef-f06de913b042" />
-<img width="1054" height="888" alt="image" src="https://github.com/user-attachments/assets/c7df7d76-8768-43d8-8669-5fbe1479961c" />
+<img width="549" height="868" alt="image" src="https://github.com/user-attachments/assets/e0f3254c-608e-4b30-a7b4-fc8a3044137b" />
+<img width="423" height="394" alt="image" src="https://github.com/user-attachments/assets/587ef036-ca73-4a35-9d14-000829e21b53" />
+<img width="850" height="713" alt="image" src="https://github.com/user-attachments/assets/0c629594-17b5-47fd-9ec4-93fb94c40de7" />
+<img width="399" height="367" alt="image" src="https://github.com/user-attachments/assets/42276753-eabb-4515-8931-de9fa348974c" />
+<img width="793" height="716" alt="image" src="https://github.com/user-attachments/assets/8b35abf0-49fb-48f2-8745-afe1aaaf37ab" />
+
 
 ### Plot comparing the state value functions of Monte Carlo method and Q-learning
-<img width="1550" height="672" alt="image" src="https://github.com/user-attachments/assets/7a6399c9-caf6-419c-b4d7-3f24d89337d1" />
-<img width="1602" height="664" alt="image" src="https://github.com/user-attachments/assets/8ebd81d6-0459-49b6-bb0a-c88264647086" />
+<img width="1487" height="821" alt="image" src="https://github.com/user-attachments/assets/059a1df9-538d-4998-b720-d0ae6a8d1d8c" />
+<img width="1484" height="823" alt="image" src="https://github.com/user-attachments/assets/3a668f12-ce7e-42b2-a3b2-cc49f426d19d" />
 
 ## RESULT
 The Q-Learning algorithm was successfully implemented. The agent learned an optimal policy that maximized cumulative rewards through iterative Q-value updates.
